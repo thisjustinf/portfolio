@@ -1,4 +1,5 @@
 import { Menu } from "lucide-react";
+import Image from "next/image";
 
 import {
   Accordion,
@@ -47,36 +48,42 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
+    url: "/",
     src: "https://www.shadcnblocks.com/images/block/block-1.svg",
     alt: "logo",
     title: "JF",
   },
   menu = [
-    { title: "About", url: "#" },
-    { title: "Projects", url: "#" },
-    { title: "Blog", url: "#" },
+    { title: "About", url: "#about" },
+    { title: "Skills", url: "/#skills" },
+    { title: "Projects", url: "/projects" },
   ],
 }: NavbarProps): ReactElement => {
   return (
     <section className="py-4 px-4">
       <div className="container">
-        <nav className="hidden justify-between items-center lg:flex">
-          <div id="logo" className="hidden lg:flex lg:self-start">
-            <a href={logo.url} className="flex items-center">
-              <img src={logo.src} className="w-8" alt={logo.alt} />
-              <span className="text-lg font-semibold">{logo.title}</span>
-            </a>
+        <nav className="hidden justify-between items-center md:flex lg:flex">
+          <div className="hidden lg:flex lg:self-start">
+            <Image
+              className="dark:invert"
+              src="/logo.svg"
+              alt="Logo"
+              width={64}
+              height={64}
+              priority
+            />
           </div>
-          <div id="menu" className="lg:flex lg:self-end">
+          <div id="menu" className="lg:flex">
             <NavigationMenu>
               <NavigationMenuList>
                 {menu.map(
                   (item: MenuItem): ReactElement => renderMenuItem(item),
                 )}
-                <ModeToggle />
               </NavigationMenuList>
             </NavigationMenu>
+            <div className="self-end">
+              <ModeToggle />
+            </div>
           </div>
         </nav>
         <div className="block lg:hidden">
