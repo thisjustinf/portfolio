@@ -1,4 +1,7 @@
+import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
+import About from "./sections/about";
+import Skills from "./sections/skills";
 import Footer from "./shared/footer";
 
 export default function Home() {
@@ -49,6 +52,10 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+        <Separator />
+        <About />
+        <Separator />
+        <Skills />
       </main>
       <Footer />
     </div>
