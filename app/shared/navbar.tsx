@@ -5,21 +5,21 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
+  AccordionTrigger
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
-  NavigationMenuTrigger,
+  NavigationMenuTrigger
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
+  SheetTrigger
 } from "@/components/ui/sheet";
 import { type FC, JSX, ReactElement } from "react";
 import { ModeToggle } from "./mode-toggle";
@@ -49,78 +49,79 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({
   logo = {
     url: "/",
-    src: "https://www.shadcnblocks.com/images/block/block-1.svg",
+    src: "/logo.svg",
     alt: "logo",
-    title: "JF",
+    title: "JF"
   },
   menu = [
     { title: "About", url: "#about" },
     { title: "Skills", url: "/#skills" },
-    { title: "Projects", url: "/projects" },
-  ],
+    { title: "Projects", url: "/projects" }
+  ]
 }: NavbarProps): ReactElement => {
   return (
     <section className="py-4 px-4">
-      <div className="container">
-        <nav className="hidden justify-between items-center md:flex lg:flex">
-          <div className="hidden lg:flex lg:self-start">
+      <nav className="hidden justify-between items-center md:flex lg:flex">
+        <div className="hidden lg:flex lg:self-start">
+          <Image
+            className="dark:invert"
+            src={logo.src}
+            alt={logo.alt}
+            width={64}
+            height={64}
+            priority
+          />
+        </div>
+        <div id="menu" className="lg:flex">
+          <NavigationMenu>
+            <NavigationMenuList>
+              {menu.map((item: MenuItem): ReactElement => renderMenuItem(item))}
+            </NavigationMenuList>
+          </NavigationMenu>
+          <div className="self-end">
+            <ModeToggle />
+          </div>
+        </div>
+      </nav>
+      <div className="block lg:hidden">
+        <div className="flex items-center justify-between">
+          <a href={logo.url} className="flex items-center gap-2">
             <Image
               className="dark:invert"
-              src="/logo.svg"
-              alt="Logo"
-              width={64}
-              height={64}
+              src={logo.src}
+              alt={logo.alt}
+              width={32}
+              height={32}
               priority
             />
-          </div>
-          <div id="menu" className="lg:flex">
-            <NavigationMenu>
-              <NavigationMenuList>
-                {menu.map(
-                  (item: MenuItem): ReactElement => renderMenuItem(item),
-                )}
-              </NavigationMenuList>
-            </NavigationMenu>
-            <div className="self-end">
-              <ModeToggle />
-            </div>
-          </div>
-        </nav>
-        <div className="block lg:hidden">
-          <div className="flex items-center justify-between">
-            <a href={logo.url} className="flex items-center gap-2">
-              <img src={logo.src} className="w-8" alt={logo.alt} />
-              <span className="text-lg font-semibold">{logo.title}</span>
-            </a>
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
-                  <Menu className="size-4" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent className="overflow-y-auto">
-                <SheetHeader>
-                  <SheetTitle>
-                    <a href={logo.url} className="flex items-center gap-2">
-                      <img src={logo.src} className="w-8" alt={logo.alt} />
-                      <span className="text-lg font-semibold">
-                        {logo.title}
-                      </span>
-                    </a>
-                  </SheetTitle>
-                </SheetHeader>
-                <div className="my-6 flex flex-col gap-6">
-                  <Accordion
-                    type="single"
-                    collapsible
-                    className="flex w-full flex-col gap-4"
-                  >
-                    {menu.map((item: MenuItem) => renderMobileMenuItem(item))}
-                  </Accordion>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+            <span className="text-lg font-semibold">{logo.title}</span>
+          </a>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon">
+                <Menu className="size-4" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="overflow-y-auto">
+              <SheetHeader>
+                <SheetTitle>
+                  <a href={logo.url} className="flex items-center gap-2">
+                    <img src={logo.src} className="w-8" alt={logo.alt} />
+                    <span className="text-lg font-semibold">{logo.title}</span>
+                  </a>
+                </SheetTitle>
+              </SheetHeader>
+              <div className="my-6 flex flex-col gap-6">
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="flex w-full flex-col gap-4"
+                >
+                  {menu.map((item: MenuItem) => renderMobileMenuItem(item))}
+                </Accordion>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </section>
@@ -128,7 +129,7 @@ const Navbar: FC<NavbarProps> = ({
 };
 
 const renderMenuItem: (item: MenuItem) => ReactElement = (
-  item: MenuItem,
+  item: MenuItem
 ): ReactElement => {
   if (item.items) {
     return (
@@ -150,7 +151,7 @@ const renderMenuItem: (item: MenuItem) => ReactElement = (
 };
 
 const renderMobileMenuItem: (item: MenuItem) => ReactElement = (
-  item: MenuItem,
+  item: MenuItem
 ): ReactElement => {
   if (item.items) {
     return (
@@ -176,7 +177,7 @@ const renderMobileMenuItem: (item: MenuItem) => ReactElement = (
                   )}
                 </div>
               </a>
-            ),
+            )
           )}
         </AccordionContent>
       </AccordionItem>
